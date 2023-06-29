@@ -12,4 +12,5 @@ Cron(크론)은 소프트웨어 유틸리티로써 유닉스 계열 컴퓨터 �
 크론 표현식은 <주기 커맨드>의 형태로 구성된다. 주기의 경우 다양한 주기를 설정할 수 있고, 커맨드에서는 윈도우 배치 파일(.bat)이나 자바/파이썬 등의 파일을 실행할 수 있다.
 
 표현식 참고 : https://zamezzz.tistory.com/197
+
 주기 설정 참고 사이트 : http://www.cronmaker.com/;jsessionid=node0q1vadruy4kh6na1h672govdm134701.node0?0 / https://crontab.guru/
