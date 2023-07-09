@@ -1,6 +1,8 @@
 # Spring
 
 - [Spring의 특징](#spring의-특징)
+- xml vs properties
+- maven vs gradle
 
 </br>
 
