@@ -7,6 +7,8 @@
 - 트리
 - DP
 - 재귀
+- 순열
+- 조합
 
 ## 슬라이딩 윈도우
 
@@ -14,3 +16,47 @@
 고정 사이즈의 윈도우가 이동하면서 윈도우 내에 있는 데이터를 이용해 문제를 풀이하는 알고리즘을 말한다. 배열이나 리스트의 요소의 일정 범위의 값을 비교할 때 사용하면 매우 유용하다. 원래 네트워크에서 사용되던 알고리즘을 문제풀이에 응용한 경우이다. 배열이나 리스트의 요소를 슬라이딩 윈도우를 사용하지 않고 단순히 값을 비교하면 배열이나 리스트의 크기, 비교해야 하는 일정 범위가 커지면 커질 수록 시간복잡도가 굉장히 커지게 된다. 이러한 경우에 시간복잡도를 줄이기 위해 사용할 수 있다. 한 칸씩 이동하기 때문에 공통된 부분은 유지하고 처음과 끝 원소만 갱신하며 비교할 수 있다.
 
 https://soeasyalgo.tistory.com/49
+
+## 순열
+- 순열
+  
+  1, 2, 3, 4, 5 중에서 순서를 생각하여 3개를 뽑는다. 1, 2, 3과 1, 3, 2를 다르게 생각한다.
+  ```
+  private static void makePermutation(int r, int[] temp, int current, boolean[] visited) {
+		if (r == current) {
+			System.out.println(Arrays.toString(temp));
+		} else {
+			for (int i = 0; i < arr.length; i++) {
+				if (!visited[i]) {
+					visited[i] = true;
+					temp[current] = arr[i];
+					makePermutation(r, temp, current +1, visited);
+					visited[i] = false;
+				}
+			}
+		}
+	}
+  ```
+  - r : 뽑고자 하는 개수
+  - temp : r개를 뽑는 결과를 저장하는 배열
+  - current : 현재 개수를 저장해놓은 값
+  - visited : 방문 여부 확인 배열
+- 중복순열
+
+  순서를 고려해서 중복을 포함한 3개를 뽑는 것이다. 1, 2, 1과 2, 1, 1을 다르게 생각한다
+  ```
+  private static void makeOverlabPermutation(int r, int[] temp, int current) {
+		if (r == current) {
+			System.out.println(Arrays.toString(temp));
+		} else {
+			for (int i = 0; i < arr.length; i++) {
+				temp[current] = arr[i];
+				makeOverlabPermutation(r, temp, current + 1);
+			}
+		}
+	}
+  ```
+    - r : 뽑고자 하는 개수
+  - temp : r개를 뽑는 결과를 저장하는 배열
+  - current : 현재 개수를 저장해놓은 값
+  - visited : 방문 여부 확인 배열
