@@ -6,6 +6,8 @@
 - NoSQL
 - RDBMS
 - JOIN
+- 인덱싱
+- 파티셔닝
 
 ## JDBC란?
 
@@ -50,6 +52,22 @@
 
 ### DDL : Data Definition Language
 
+데이터베이스를 정의하는 언어이며, 데이터를 생성, 수정, 삭제하는 등의 데이터의 전체의 골격을 결정하는 역할을 하는 언어이다. <br>
+
+- create : 데이터베이스, 테이블 등을 생성하는 역할
+- alter : 테이블을 수정하는 역할
+- drop : 데이터베이스, 테이블을 삭제하는 역할
+- truncate : 테이블을 초기화시키는 역할
+
 ### DCL : Data Control Language
 
+데이터베이스에 접근하거나 객체에 권한을 주는 등의 역할을 하는 언어이다. <br>
+
+- grant : 특정 데이터베이스 사용자에게 특정 작업에 대한 수행권한을 부여
+- revoke : 특정 데이터베이스 사용자에게 특정 작업에 대한 수행 권한을 박탈, 회수
+- commit : 트랜잭션의 작업을 취소 및 원래로 복구하는 역할
+- rollback : 트랜잭션의 작업을 취소 및 원래대로 복구하는 역할
+
 ### TCL : Transaction Control Language
+
+일부에서는 DCL에서 트랜잭션을 제어하는 commit과 rollback을 TCL이라고 표현하기도 한다. <br>
