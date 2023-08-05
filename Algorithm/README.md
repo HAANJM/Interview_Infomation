@@ -73,3 +73,120 @@ https://soeasyalgo.tistory.com/49
 - BFS는 방문한 노드들을 차례로 저장한 후 꺼낼 수 있는 자료 구조인 큐(Queue)를 사용한다.
 - 즉, 선입선출(FIFO) 원칙으로 탐색
 - 일반적으로 큐를 이용해서 반복적 형태로 구현하는 것이 가장 잘 동작한다.
+
+1. 인접 리스트로 구현한 BFS
+
+```
+import java.util.*;
+
+public class BFS_List {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		int n = sc.nextInt(); // 정점의 개수 
+		int m = sc.nextInt(); // 간선의 개수 
+		int v = sc.nextInt(); // 탐색을 시작할 정점의 번호 
+
+		boolean visited[] = new boolean[n + 1]; // 방문 여부를 검사할 배열 
+
+		LinkedList<Integer>[] adjList = new LinkedList[n + 1];
+
+		for (int i = 0; i <= n; i++) {
+			adjList[i] = new LinkedList<Integer>();
+		}
+
+		// 두 정점 사이에 여러 개의 간선이 있을 수 있다.
+		// 입력으로 주어지는 간선은 양방향이다.
+		for (int i = 0; i < m; i++) {
+			int v1 = sc.nextInt();
+			int v2 = sc.nextInt();
+			adjList[v1].add(v2);
+			adjList[v2].add(v1);
+		}
+
+		for (int i = 1; i <= n; i++) { 
+			Collections.sort(adjList[i]); // 방문 순서를 위해 오름차순 정렬 
+		}
+
+		System.out.println("BFS - 인접리스트");
+		bfs_list(v, adjList, visited);
+	}
+
+	// BFS - 인접리스트 
+	public static void bfs_list(int v, LinkedList<Integer>[] adjList, boolean[] visited) {
+		Queue<Integer> queue = new LinkedList<Integer>();
+		visited[v] = true; 
+		queue.add(v);
+
+		while(queue.size() != 0) { 
+			v = queue.poll(); 
+			System.out.print(v + " ");
+
+			Iterator<Integer> iter = adjList[v].listIterator();
+			while(iter.hasNext()) { 
+				int w = iter.next(); 
+				if(!visited[w]) { 
+					visited[w] = true; 
+					queue.add(w); 
+				} 
+			}
+		}
+	}
+
+}
+```
+   
+2. 인접 행렬로 구현한 BFS
+
+```
+import java.util.*;
+
+public class BFS_Array {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+
+		int n = sc.nextInt(); // 정점의 개수 
+		int m = sc.nextInt(); // 간선의 개수 
+		int v = sc.nextInt(); // 탐색을 시작할 정점의 번호 
+
+		boolean visited[] = new boolean[n + 1]; // 방문 여부를 검사할 배열 
+
+		int[][] adjArray = new int[n+1][n+1];
+
+		// 두 정점 사이에 여러 개의 간선이 있을 수 있다.
+		// 입력으로 주어지는 간선은 양방향이다.
+		for(int i = 0; i < m; i++) {
+			int v1 = sc.nextInt();
+			int v2 = sc.nextInt();
+
+			adjArray[v1][v2] = 1;
+			adjArray[v2][v1] = 1;
+		}
+
+		System.out.println("BFS - 인접행렬");
+		bfs_array(v, adjArray, visited);
+	}
+	
+	// BFS - 인접행렬
+	public static void bfs_array(int v, int[][] adjArray, boolean[] visited) {
+		Queue<Integer> q = new LinkedList<>();
+		int n = adjArray.length - 1;
+
+		q.add(v);
+		visited[v] = true;
+
+		while (!q.isEmpty()) {
+			v = q.poll();
+			System.out.print(v + " ");
+
+			for (int i = 1; i <= n; i++) {
+				if (adjArray[v][i] == 1 && !visited[i]) {
+					q.add(i);
+					visited[i] = true;
+				}
+			}
+		}
+	}
+	
+}
+```
