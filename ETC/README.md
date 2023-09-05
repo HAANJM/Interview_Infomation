@@ -31,3 +31,34 @@ Cron(크론)은 소프트웨어 유틸리티로써 유닉스 계열 컴퓨터 �
 
 ## ROS
 로봇 운영체제(ROS,Robot Operating System)는 로봇 응용 프로그램을 개발할 때 필요한 하드웨어 추상화, 하위 디바이스 제어, 일반적으로 사용되는 기능의 구현, 프로세스간의 메시지 패싱, 패키지 관리, 개발환경에 필요한 라이브러리와 다양한 개발 및 디버깅 도구를 제공한다. ROS는 로봇 응용 프로그램 개발을 위한 운영체제와 같은 로봇 플랫폼이다.
+
+### Bridge_launch 노드
+ssafybridge_launch.py 실행 시 4개의 노드가 자동으로 실행됨
+
+- udp_to_pub
+1. 각각의 data_type(envir_status, app_status, turtlebot_status, imu, custom_object_info)에 맞춰 퍼블리셔를 생성
+2. ssafy_udp_parser 노드의 erp_udp_parser 메소드를 이용하여 해당하는 유저 ip와 포트에 맞게 udp데이터를 파싱
+- sub_to_udp
+- udp_to_cam
+  ```
+  params_cam_0 = {
+      "SOCKET_TYPE": 'JPG',
+      "WIDTH": 320, # image width
+      "HEIGHT": 240, # image height
+      "FOV": 60, # Field of view
+      "localIP": "127.0.0.1",
+      "localPort": 1232,
+      "Block_SIZE": int(65000),
+      "UnitBlock_HEIGHT": int(30),
+      "X": 1.7, # meter
+      "Y": 0,
+      "Z": 1.2,
+      "YAW": 0, # deg
+      "PITCH": -5,
+      "ROLL": 0
+  }
+  ```
+  1. 주어진 params_cam_0 데이터를 utils.py의 UDP_CAM_Parser 메소드에 전달하여 카메라로 촬영하는 데이터를 수신
+  2. CompressedImage를 발신하는 퍼블리셔 생성
+  3. 받아오는 데이터의 바이트가 0이 아니라면 jpeg로 포맷하여 퍼블리싱
+- udp_to_laser
