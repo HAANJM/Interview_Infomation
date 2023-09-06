@@ -62,3 +62,49 @@ ssafybridge_launch.py 실행 시 4개의 노드가 자동으로 실행됨
   2. CompressedImage를 발신하는 퍼블리셔 생성
   3. 받아오는 데이터의 바이트가 0이 아니라면 jpeg로 포맷하여 퍼블리싱
 - udp_to_laser
+
+ssafy_bridge 패키지에는 존재하나 실행되지 않는 노드
+
+cam_viewer
+
+- sub1의 perception 노드와 비슷한 역할을 진행
+- 시뮬레이터의 터틀봇이 촬영하는 이미지 데이터를 실시간으로 전송하여 외부의 창을 통해 송출하는 역할
+- 존재하나 launch.py에 포함되지 않아 실행되지는 않는다
+
+ssafy_udp_parser
+
+- ssafy_bridge 패키지의 노드들이 기능을 위해 필요한 클래스를 포함
+    - erp_udp_parser
+ 
+```
+      def __init__(self,publisher,ip,port,data_type):
+    
+    				# udp_to_pub 에서 실행할 때 받아온 매개변수 세팅
+            self.ip=ip # UDP 데이터를 수신할 IP 주소
+            self.port=port # UDP 데이터를 수신할 포트 번호
+            self.publisher=publisher # 데이터를 발행하는 데 사용되는 객체
+            self.data_type=data_type # 수신된 데이터의 유형을 지정하는 문자열
+    				
+            self.is_sender_port=False # 송신 정보 포트
+    			
+    				# UDP 통신에 필요한 socket 객체 생성
+            self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    
+    				# 수신할 ip주소와 port 번호를 튜플로 생성합니다
+            recv_address = (self.ip,self.port)
+    				# 튜플로 생성한 ip주소와 port번호를 소켓에 바인딩합니다
+            self.sock.bind(recv_address)
+    				# 데이터의 최대 크기 설정, 65535바이트
+            self.data_size=65535 
+    				# 파싱한 데이터를 받기 위한 빈 배열을 초기화
+            self.parsed_data=[]
+    
+    				# UDP 데이터를 비동기적으로 처리하기 위한 스레드 생성
+    				# recv_udp_data 메소드가 이 스레드의 작업대상
+            thread = threading.Thread(target=self.recv_udp_data)
+    				# 스레드를 데몬 쓰레드로 설정
+    				# 데몬 쓰레드 : 백그라운드에서 작동
+            thread.daemon = True 
+    				# 쓰레드를 시작하여 UPD 데이터를 비동기적으로 수신
+            thread.start()
+```
