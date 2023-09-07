@@ -108,3 +108,25 @@ ssafy_udp_parser
     				# 쓰레드를 시작하여 UPD 데이터를 비동기적으로 수신
             thread.start()
 ```
+```
+      def recv_udp_data(self):
+        while True : # 무한반복
+    				# 수신한 UDP 데이터를
+    				# raw_data : 수신한 데이터
+    				# sender : 송신자의 정보(주소 및 포트)
+            raw_data, sender = self.sock.recvfrom(self.data_size)
+            
+    				# raw_data에 저장된 UDP 데이터를 처리하기 위해 data_parsing 메서드를 호출
+    				# data_parsing : 주어진 데이터를 파싱하고 처리
+    				self.data_parsing(raw_data)
+            
+    				# is_sender_port 의 값이 False일 때만 실행
+    				# 초기에 False로 지정하고 아래의 코드 블럭이 실행되면 True로 변하기 때문에
+    				# 송신 포트 정보를 처음 수신했을때만 실행되는 코드이다
+            if self.is_sender_port == False :
+                self.is_sender_port= True # True로 설정하여 송신 포트 정보를 한번만 저장하도록 한다
+                self.sender_port=sender[1] # 송신자 정보 sender에서 포트 번호(sender[1])를 추출하여 저장
+    
+    				# 처음 수신한 데이터의 송신 포트 정보를 저장
+    				# 나중에 데이터를 보낼 때 적절한 포트로 데이터를 전송할 수 있다
+```
