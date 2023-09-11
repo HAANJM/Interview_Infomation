@@ -34,7 +34,7 @@ Cron(크론)은 소프트웨어 유틸리티로써 유닉스 계열 컴퓨터 �
 
 ### ROS1 / ROS2 차이
 
-<img src="./img/ros_version.png">
+<img src="/img/ros_version.png">
 
 ### Bridge_launch 노드
 ssafybridge_launch.py 실행 시 4개의 노드가 자동으로 실행됨
