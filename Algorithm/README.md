@@ -61,6 +61,27 @@ https://soeasyalgo.tistory.com/49
   - current : 현재 개수를 저장해놓은 값
   - visited : 방문 여부 확인 배열
 
+## 조합
+
+```
+	static void comb(int[] arr, boolean[] visited, int depth, int n, int r) {
+	    if (r == 0) {
+	        print(arr, visited, n);
+	        return;
+	    }
+	
+	    if (depth == n) {
+	        return;
+	    }
+	
+	    visited[depth] = true;
+	    comb(arr, visited, depth + 1, n, r - 1);
+	
+	    visited[depth] = false;
+	    comb(arr, visited, depth + 1, n, r);
+	}
+```
+
 ## BFS
 너비 우선 탐색은 맹목적 탐색 방법의 하나로 시작 정점을 방문한 후 시작 정점에 인접한 모든 정점들을 우선 방문하는 방법이다. 더 이상 방문하지 않은 정점이 없을 때까지 방문하지 않은 모든 정점들에 대해서도 너비 우선 검색을 적용한다. 
 
