@@ -3,7 +3,7 @@
 
 # 사건의 발단
 
-"[https://api.odsay.com/v1/api/searchPubTransPathT?lang=0&output=json&SX=127.0368&SY=37.50066001&EX=127.0339528&EY=37.50732819&OPT=0&apiKey=](https://api.odsay.com/v1/api/searchPubTransPathT?lang=0&output=json&SX=127.0368&SY=37.50066001&EX=127.0339528&EY=37.50732819&OPT=0&apiKey=fIjyUAGsU4ya8+K+3lTfAafT8TQL/F/QVrSR25LvePI)fIjyUAGsU4ya8%2BK%2B3lTfAafT8TQL%2FF%2FQVrSR25LvePI”
+"[https://api.odsay.com/v1/api/searchPubTransPathT?lang=0&output=json&SX=127.0368&SY=37.50066001&EX=127.0339528&EY=37.50732819&OPT=0&apiKey=](https://api.odsay.com/v1/api/searchPubTransPathT?lang=0&output=json&SX=127.0368&SY=37.50066001&EX=127.0339528&EY=37.50732819&OPT=0&apiKey=apikey는보안처리”
 
 로 올바르게 api 호출을 보내고 있었으나 제대로 응답이 오지 않는 문제가 발생
 
